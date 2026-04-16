@@ -13,8 +13,10 @@
         device-orientation-permission-ui="enabled: false">
 
         <a-assets>
-            <a-asset-item id="avatarModel" src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/Duck/glTF/Duck.gltf"></a-asset-item>
+            <a-asset-item id="Go2Model" src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/main/models/Go2.gltf"></a-asset-item>
+            <a-asset-item id="eveModel" src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/main/models/eve.glb"></a-asset-item>
             <a-asset-item id="skullModel" src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/ScatteringSkull/glTF/ScatteringSkull.gltf"></a-asset-item>
+            <a-asset-item id="avocadoModel" src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/Avocado/glTF/Avocado.gltf"></a-asset-item>
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -22,8 +24,9 @@
         <a-entity mindar-image-target="targetIndex: 0">
             <a-gltf-model rotation="90 0 0 "
                 position="0 0 0.1"
-                scale="1 1 1"
-                src="#skullModel">
+                scale="5 5 5"
+                src="#Go2Model">
+            </a-gltf-model>
         </a-entity>
 
     </a-scene>
