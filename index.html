@@ -1,54 +1,72 @@
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sceneEl = document.querySelector("a-scene");
+
+            sceneEl.addEventListener("loaded", function () {
+                const go2Model = document.querySelector("#go2-entity");
+
+                go2Model.addEventListener("click", function () {
+                    console.log("¡Go2 tocado!");
+
+                    // activar animación de rotación
+                    go2Model.setAttribute("animation", {
+                        property: "rotation",
+                        to: "90 360 0",
+                        dur: 2000,
+                        loop: true,
+                        easing: "linear"
+                    });
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
-    <a-scene
-        mindar-image="imageTargetSrc: ./PortonAA.mind;
+    <a-scene mindar-image="imageTargetSrc: ./PortonAA.mind;
             missTolerance: 0;
             filterMinCF: 0.001;
             filterBeta: 0.01;
-            warmupTolerance: 5"
-        vr-mode-ui="enabled: false"
-        color-space="sRGB"
+            warmupTolerance: 5" vr-mode-ui="enabled: false" color-space="sRGB"
         device-orientation-permission-ui="enabled: false">
 
         <a-assets>
-            <a-asset-item id="Go2Model" src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Go2/Go2.gltf"></a-asset-item>
-            <a-asset-item id="eveModel" src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/EVA/eva.gltf"></a-asset-item>
-            <a-asset-item id="ezeizaModel" src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Ezeiza/Ezeiza.gltf"></a-asset-item>
+            <a-asset-item id="Go2Model"
+                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Go2/Go2.gltf"></a-asset-item>
+            <a-asset-item id="eveModel"
+                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/EVA/eva.gltf"></a-asset-item>
+            <a-asset-item id="ezeizaModel"
+                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Ezeiza/Ezeiza.gltf"></a-asset-item>
         </a-assets>
 
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+        <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
+            raycaster="far: 10000; objects: .clickable">
+        </a-camera>
 
         <a-entity mindar-image-target="targetIndex: 0">
-            <a-gltf-model rotation="90 0 0"
-                position="0 0 0.1"
-                scale="1.5 1.5 1.5"
+            <a-gltf-model id="go2-entity" class="clickable" rotation="90 0 0" position="0 0 0.1" scale="1.5 1.5 1.5"
                 src="#Go2Model">
             </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 1">
-            <a-gltf-model rotation="90 0 0"
-                position="0 0 0.1"
-                scale="0.0075 0.0075 0.0075"
-                src="#ezeizaModel">
+            <a-gltf-model rotation="90 0 0" position="0 0 0.1" scale="0.0075 0.0075 0.0075" src="#ezeizaModel">
             </a-gltf-model>
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 2">
-            <a-gltf-model rotation="0 90 90"
-                position="0 0 0.1"
-                scale="0.3 0.3 0.3"
-                src="#eveModel"
+            <a-gltf-model rotation="0 90 90" position="0 0 0.1" scale="0.3 0.3 0.3" src="#eveModel"
                 animation="property: position; to: 0 0 0.4; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
             </a-gltf-model>
         </a-entity>
 
     </a-scene>
 </body>
+
 </html>
