@@ -26,11 +26,19 @@
             <a-asset-item id="ezeizaModel"
                 src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Ezeiza/Ezeiza.gltf">
             </a-asset-item>
-
             
-            <a-asset-item id="LAModel"
-                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/EVA/eva.gltf">
+            <a-asset-item id="Cheeseburger"
+                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Food/Cheeseburger.glb">
             </a-asset-item>
+
+            <a-asset-item id="Burrito"
+                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Food/Burrito.glb">
+            </a-asset-item>
+
+            <a-asset-item id="Taco"
+                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Food/Taco.glb">
+            </a-asset-item>
+
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
@@ -72,7 +80,9 @@
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 3">
-            <a-gltf-model rotation="0 90 90" position="0 0 0.1" scale="0.3 0.3 0.3" src="#eveModel"></a-gltf-model>
+            <a-gltf-model rotation="0 0 0" position="0.5 0 0.1" scale="0.75 0.75 0.75" src="#Taco"></a-gltf-model>
+            <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.5 0.5 0.5" src="#Burrito"></a-gltf-model>
+            <a-gltf-model rotation="0 0 0" position="-0.5 0 0.1" scale="0.1 0.1 0.1" src="#Cheeseburger"></a-gltf-model>
         </a-entity>
 
     </a-scene>
