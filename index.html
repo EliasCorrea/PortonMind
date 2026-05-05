@@ -39,6 +39,10 @@
                 src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/Food/Taco.glb">
             </a-asset-item>
 
+            <a-asset-item id="LAlogo"
+                src="https://raw.githubusercontent.com/EliasCorrea/PortonMind/refs/heads/main/models/LA/LAlogo.glb">
+            </a-asset-item>
+
         </a-assets>
 
         <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
@@ -49,23 +53,27 @@
 
             <a-gltf-model id="go2-entity" rotation="90 0 0" position="0 0 0.1" scale="1.5 1.5 1.5" src="#Go2Model"></a-gltf-model>
 
-            <a-box id="btn-rotate" class="clickable" position="-0.5 -0.5 -0.1" rotation="90 0 0" scale="0.2 0.1 0.1" color="red">
-                <a-entity text="value: Encendido; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="10 10 10"></a-entity>
+            <a-box id="btn-encendido" class="clickable" position="-0.5 -0.5 -0.1" rotation="90 0 0" scale="0.2 0.1 0.1" color="blue">
+                <a-entity text="value: On/Off; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="8 8 8"></a-entity>
             </a-box>
 
-            <a-box id="btn-bateria" class="clickable" position="0 -0.5 -0.1" scale="0.2 0.1 0.1" color="blue">
-                <a-entity text="value: Encendido; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="10 10 10"></a-entity>
+            <a-box id="btn-bateria" class="clickable" position="0 -0.5 -0.1" rotation="90 0 0" scale="0.2 0.1 0.1" color="blue">
+                <a-entity text="value: Bateria; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="8 8 8"></a-entity>
             </a-box>
 
-            <a-box id="btn-info" class="clickable" position="0.5 -0.5 -0.1" scale="0.2 0.1 0.1" color="yellow">
-                <a-entity text="value: INFO; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="10 10 10"></a-entity>
+            <a-box id="btn-info" class="clickable" position="0.5 -0.5 -0.1" rotation="90 0 0" scale="0.2 0.1 0.1" color="yellow">
+                <a-entity text="value: INFO; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="8 8 8"></a-entity>
             </a-box>
 
-            <a-entity text="value: Unitree Go2, AiphaG; color: #FAFAFA; width: 6; anchor: align" position="0.5 -0.5 0" rotation="0 0 90" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="text-info" text="value: Unitree Go2, AiphaG; color: #FAFAFA; width: 6; anchor: align" position="0.5 -0.5 0" rotation="0 0 90" scale="0.5 0.5 0.5"></a-entity>
             
-            <a-entity text="value: BT2-05 Smart Battery, ; color: #FAFAFA; width: 1.5; anchor: align" position="0.25 -0.135 0.8" rotation="0 90 90" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="text-info" text="value: BT2-05 Smart Battery, ; color: #FAFAFA; width: 1.5; anchor: align" position="0.25 -0.135 0.8" rotation="0 90 90" scale="0.5 0.5 0.5"></a-entity>
 
-            <a-entity text="value: LIDAR 4D Sensor; color: #FAFAFA; width: 1.5; anchor: align" position="-0.15 -0.5 0.7" rotation="90 0 0" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="text-info" text="value: LIDAR 4D Sensor; color: #FAFAFA; width: 1.5; anchor: align" position="-0.15 -0.5 0.7" rotation="90 0 0" scale="0.5 0.5 0.5"></a-entity>
+
+            <a-entity id="text-bateria" text="value: Presionar el boton de la bateria una vez 1 segundo, y otra vez constante hasta que las luces de la bateria flashean y enciende ventiladores; color: #FAFAFA; width: 1.5; anchor: align" position="0 0 1" rotation="90 0 0" scale="0.5 0.5 0.5"></a-entity>
+
+            <a-entity id="text-encendido" text="value: Posicionar el Cuadrupedo en posicion de apagado, con sus patas; color: #FAFAFA; width: 1.5; anchor: align" position="0 0.2 -1" rotation="90 0 0" scale="0.5 0.5 0.5"></a-entity>
 
         </a-entity>
 
@@ -80,10 +88,11 @@
         </a-entity>
 
         <a-entity mindar-image-target="targetIndex: 3">
-            <a-gltf-model rotation="0 0 0" position="0.5 0 0.1" scale="0.75 0.75 0.75" src="#Taco"></a-gltf-model>
-            <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.5 0.5 0.5" src="#Burrito"></a-gltf-model>
-            <a-gltf-model rotation="0 0 0" position="-0.5 0 0.1" scale="0.1 0.1 0.1" src="#Cheeseburger"></a-gltf-model>
+            <a-gltf-model rotation="0 0 0" position="0 0 0.1" scale="0.025 0.025 0.025" src="#LAlogo"
+                animation="property: rotation; to: 360 0 0; dur: 3000; easing: easeInOutQuad; loop: true;">
+            </a-gltf-model>
         </a-entity>
+
 
     </a-scene>
     <script src="funtions.js"></script>

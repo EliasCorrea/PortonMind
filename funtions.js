@@ -1,88 +1,53 @@
 // ==========================
-// FUNCIONES
+// ESTADO DE VISIBILIDAD
+// ==========================
+const visibilidad = {
+    encendido: false,
+    bateria: false,
+    info: false,
+};
+
+// ==========================
+// FUNCIONES TOGGLE
 // ==========================
 
-function rotarGo2() {
-    const go2Model = document.querySelector("#go2-entity");
-
-    if (!go2Model) return;
-
-    go2Model.setAttribute("animation", {
-        property: "rotation",
-        to: "90 360 0",
-        dur: 2000,
-        loop: true,
-        easing: "linear"
-    });
+function toggleEncendido() {
+    visibilidad.encendido = !visibilidad.encendido;
+    const el = document.querySelector("#text-encendido");
+    if (el) el.setAttribute("visible", visibilidad.encendido ? "true" : "false");
+    console.log("Encendido visible:", visibilidad.encendido);
 }
 
-function mostrarBateria() {
-    console.log("Nivel de batería (ejemplo)");
+function toggleBateria() {
+    visibilidad.bateria = !visibilidad.bateria;
+    const el = document.querySelector("#text-apagado");
+    if (el) el.setAttribute("visible", visibilidad.bateria ? "true" : "false");
+    console.log("Bateria visible:", visibilidad.bateria);
 }
-
-function detenerGo2() {
-    const go2Model = document.querySelector("#go2-entity");
-    if (!go2Model) return;
-
-    // elimina la animación
-    go2Model.removeAttribute("animation");
-}
-
-let infoVisible = true;
 
 function toggleInfo() {
-    // Selección directa de los 3 a-entity de texto informativo
-    // (los que NO están dentro de un a-box)
-    const target = document.querySelector(
-        "[mindar-image-target='targetIndex: 0']"
-    );
-    if (!target) return;
-
-    // Obtiene todos los a-entity hijos DIRECTOS del target
-    // y filtra solo los que tienen el atributo "text" (sean hijos directos)
-    const todosLosEntity = target.querySelectorAll(":scope > a-entity[text]");
-
-    todosLosEntity.forEach(function (el) {
-        el.setAttribute("visible", infoVisible ? "false" : "true");
+    visibilidad.info = !visibilidad.info;
+    const ids = ["#text-nombre", "#text-bateria-label", "#text-lidar"];
+    ids.forEach(function (id) {
+        const el = document.querySelector(id);
+        if (el) el.setAttribute("visible", visibilidad.info ? "true" : "false");
     });
-
-    infoVisible = !infoVisible;
-    console.log("Info visible:", infoVisible);
+    console.log("Info visible:", visibilidad.info);
 }
-
-
 
 // ==========================
 // SETUP DE EVENTOS
 // ==========================
 
 function setupButtons() {
-    const btnRotate = document.querySelector("#btn-rotate");
+    const btnRotate  = document.querySelector("#btn-rotate");
     const btnBateria = document.querySelector("#btn-bateria");
-    const btnToggleInfo = document.querySelector("#btn-info");
+    const btnInfo    = document.querySelector("#btn-info");
 
-    if (btnRotate) {
-        btnRotate.addEventListener("click", function () {
-            console.log("Click en ROTATE");
-            rotarGo2();
-        });
-    }
-
-    if (btnBateria) {
-        btnBateria.addEventListener("click", function () {
-            console.log("Click en BATERÍA");
-            detenerGo2();
-        });
-    }
-
-    if(btnToggleInfo){
-        btnToggleInfo.addEventListener("click", function(){
-            console.log("TOGGLE INFO" + infoVisible);
-            toggleInfo();
-        })
-    }
+    if (btnRotate)  btnRotate.addEventListener("click",  toggleEncendido);
+    if (btnBateria) btnBateria.addEventListener("click", toggleBateria);
+    if (btnInfo)    btnInfo.addEventListener("click",    toggleInfo);
 }
-
 
 // ==========================
 // INICIALIZACIÓN
@@ -90,18 +55,17 @@ function setupButtons() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const sceneEl = document.querySelector("a-scene");
-
     if (!sceneEl) return;
 
     sceneEl.addEventListener("loaded", function () {
         console.log("Escena cargada");
         setupButtons();
-        
-        const target = document.querySelector("[mindar-image-target='targetIndex: 0']");
-        if (target) {
-            target.querySelectorAll(":scope > a-entity[text]").forEach(function (el) {
-                el.setAttribute("visible", "false");
-            });
-        }
+
+        // Todos los textos ocultos al inicio
+        const ids = ["#text-encendido", "#text-apagado", "#text-nombre", "#text-bateria-label", "#text-lidar"];
+        ids.forEach(function (id) {
+            const el = document.querySelector(id);
+            if (el) el.setAttribute("visible", "false");
+        });
     });
 });
