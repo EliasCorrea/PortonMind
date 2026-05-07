@@ -52,25 +52,28 @@
 
         <a-entity mindar-image-target="targetIndex: 0">
 
-            <a-gltf-model id="go2-entity" rotation="90 0 0" position="0 0 0.1" scale="1.5 1.5 1.5" src="#Go2Model"></a-gltf-model>
+            <a-gltf-model id="go2-entity" rotation="90 0 0" position="0 0 0.1" scale="2 2 2" src="#Go2Model"></a-gltf-model>
             
-            <a-box id="btn-bateria" class="clickable" position="0 0 0" rotation="90 0 0" scale="0.4 0.2 0.2" color="blue">
-                <a-entity text="value: Bateria; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="8 8 8"></a-entity>
+            <a-box id="btn-bateria" class="clickable" position="0.5 -0.8 0" rotation="90 0 0" scale="0.2 0.1 0.1" color="#416B9F">
+                <a-entity text="value: Primeros pasos; color: #FFFFFF; width: 0.75; align: center; anchor: center" position="0 1 0" scale="8 9 8"></a-entity>
             </a-box>
 
-            <a-box id="btn-animacion" class="clickable" position="0 -0.5 -0.1" rotation="90 0 0" scale="0.4 0.2 0.2" color="green">
-                <a-entity text="value: Animar; color: #FFFFFF; width: 1; align: center; anchor: center" position="0 1 0" scale="8 8 8"></a-entity>
+            <a-box id="btn-animacion" class="clickable" position="-0 -0.8 0" rotation="90 0 0" scale="0.2 0.1 0.1" color="#416B9F">
+                <a-entity text="value: Posicion\nEncendido/Apagado; color: #FFFFFF; width: 0.75; align: center; anchor: center" position="0 1 0" scale="8 9 8"></a-entity>
             </a-box>
+
+            <a-box id="btn-info" class="clickable" position="-0.5 -0.8 0" rotation="90 0 0" scale="0.2 0.1 0.1" color="#416B9F">
+                <a-entity text="value: Partes\nImportantes; color: #FFFFFF; width: 0.75; align: center; anchor: center" position="0 1 0" scale="8 9 8"></a-entity>
+            </a-box>
+
 
             <a-entity id="text-info-0" text="value: Unitree Go2, AiphaG; color: #FAFAFA; width: 6; anchor: align" position="0.5 -0.5 0" rotation="0 0 90" scale="0.5 0.5 0.5"></a-entity>
             
-            <a-entity id="text-info-1" text="value: BT2-05 Smart Battery, ; color: #FAFAFA; width: 1.5; anchor: align" position="0.25 -0.135 0.8" rotation="0 90 90" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="text-info-1" text="value: BT2-05 Smart Battery, 8.000mAh ; color: #FAFAFA; width: 1.5; anchor: align" position="0.25 -0.135 1" rotation="0 90 90" scale="0.5 0.5 0.5"></a-entity>
 
-            <a-entity id="text-info-2" text="value: LIDAR 4D Sensor; color: #FAFAFA; width: 1.5; anchor: align" position="-0.15 -0.5 0.7" rotation="90 0 0" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="text-info-2" text="value: LIDAR 4D Sensor; color: #FAFAFA; width: 1.5; anchor: align" position="-0.15 -0.5 0.7" rotation="90 0 0" scale="0.75 0.75 0.75"></a-entity>
 
-            <a-entity id="text-bateria" text="value: Presionar el boton de la bateria una vez 1 segundo, y otra vez constante hasta que las luces de la bateria flashean y enciende ventiladores; color: #FAFAFA; width: 1.5; anchor: align" position="0 0 1" rotation="90 0 0" scale="0.5 0.5 0.5"></a-entity>
-
-            <a-entity id="text-encendido" text="value: Posicionar el Cuadrupedo en posicion de apagado, con sus patas; color: #FAFAFA; width: 1.5; anchor: align" position="0 0.2 -1" rotation="90 0 0" scale="0.5 0.5 0.5"></a-entity>
+            <a-entity id="text-bateria" text="value: Colocar el Cuadrupedo con sus patas plegadas y su torso sobre el suelo.\n Tocar el boton de encendido una vez, soltar y luego a mantenerlo presionado.; color: #FAFAFA; width: 1.25; anchor: align" position="0.25 0 0.7" rotation="90 0 0" scale="0.75 0.75 0.75"></a-entity>
 
         </a-entity>
 

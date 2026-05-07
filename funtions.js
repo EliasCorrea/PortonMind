@@ -5,8 +5,13 @@ const visibilidad = {
     encendido: false,
     bateria: false,
     info: false,
-    animando: false,
 };
+
+// ==========================
+// ESTADO DE ANIMACIÓN
+// ==========================
+// true = adelante, false = inversa
+let animDireccionAdelante = true;
 
 // ==========================
 // FUNCIONES TOGGLE
@@ -28,7 +33,7 @@ function toggleBateria() {
 
 function toggleInfo() {
     visibilidad.info = !visibilidad.info;
-    const ids = ["#text-nombre", "#text-bateria-label", "#text-lidar"];
+    const ids = ["#text-info-0", "#text-info-1", "#text-info-2"];
     ids.forEach(function (id) {
         const el = document.querySelector(id);
         if (el) el.setAttribute("visible", visibilidad.info ? "true" : "false");
@@ -40,28 +45,60 @@ function toggleAnimacion() {
     const go2 = document.querySelector("#go2-entity");
     if (!go2) return;
 
-    // Evitar múltiples disparos
+    // Evitar múltiples disparos mientras está animando
     if (go2.getAttribute("data-animando") === "true") return;
 
     go2.setAttribute("data-animando", "true");
 
-    // Reproducir UNA vez
-    go2.setAttribute("animation-mixer", {
-        clip: "*",
-        loop: "once",
-        clampWhenFinished: true,
-        timeScale: 1
-    });
+    const adelante = animDireccionAdelante;
+    animDireccionAdelante = !animDireccionAdelante;
 
-    console.log("Animación ejecutándose una vez");
+    console.log("Animación ejecutándose una vez,", adelante ? "adelante" : "inversa");
 
-    // Cuando termina, liberar el bloqueo
-    go2.addEventListener("animation-finished", function handler() {
-        console.log("Animación terminada");
+    // Remover el componente para destruir el mixer anterior
+    go2.removeAttribute("animation-mixer");
 
-        go2.setAttribute("data-animando", "false");
-        go2.removeEventListener("animation-finished", handler);
-    });
+    // Reasignar en el siguiente tick
+    setTimeout(function () {
+
+        if (adelante) {
+            // ── ADELANTE: dejar que animation-mixer arranque solo desde time=0
+            go2.setAttribute("animation-mixer", {
+                clip: "*",
+                loop: "once",
+                clampWhenFinished: true,
+                timeScale: 3
+            });
+
+        } else {
+            // ── INVERSA: primero pausado para poder posicionar el tiempo
+            go2.setAttribute("animation-mixer", {
+                clip: "*",
+                loop: "once",
+                clampWhenFinished: true,
+                timeScale: -3
+            });
+
+            // Acceder al mixer recién creado y posicionarlo al final ANTES de renderizar
+            const mixerComp = go2.components["animation-mixer"];
+            if (mixerComp && mixerComp.mixer) {
+                mixerComp.mixer._actions.forEach(function (action) {
+                    // Detener, posicionar al final y luego reproducir — todo en el mismo tick
+                    action.stop();
+                    action.timeScale = -3;
+                    action.time = action.getClip().duration;
+                    action.play();
+                });
+            }
+        }
+
+        go2.addEventListener("animation-finished", function handler() {
+            console.log("Animación terminada");
+            go2.setAttribute("data-animando", "false");
+            go2.removeEventListener("animation-finished", handler);
+        });
+
+    }, 0);
 }
 
 // ==========================
@@ -69,9 +106,9 @@ function toggleAnimacion() {
 // ==========================
 
 function setupButtons() {
-    const btnRotate   = document.querySelector("#btn-rotate");
-    const btnBateria  = document.querySelector("#btn-bateria");
-    const btnInfo     = document.querySelector("#btn-info");
+    const btnRotate    = document.querySelector("#btn-rotate");
+    const btnBateria   = document.querySelector("#btn-bateria");
+    const btnInfo      = document.querySelector("#btn-info");
     const btnAnimacion = document.querySelector("#btn-animacion");
 
     if (btnRotate)    btnRotate.addEventListener("click",    toggleEncendido);
